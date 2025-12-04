@@ -1,4 +1,69 @@
-# Passkey Provider AAGUIDs
+import time
+import base64
+import requests 
+from cryptography.hazmat.primitives import serialization
+from cryptography.hazmat.backends import default_backend
+
+# --- 1. اپنی ضروری معلومات (ان 2 لائنوں کو تبدیل کریں) ---
+# ⚠️ 1. اپنی ٹیسٹ نیٹ API Key ID یہاں لکھیں
+API_KEY = "YOUR_TESTNET_API_KEY_ID" 
+
+# ⚠️ 2. اپنی Ed25519 نجی کلید فائل کا درست راستہ یہاں دیں
+PRIVATE_KEY_PATH = "binance-ed25519-private.pem" 
+
+# ٹریڈنگ کے پیرامیٹرز (آپ انہیں اپنی ضرورت کے مطابق بدل سکتے ہیں)
+symbol = "BNBUSDT"
+side = "BUY" # خرید کا آرڈر
+quantity = "0.01"
+price = "300"
+order_type = "LIMIT"
+
+# --- 2. پیغام (Payload) تیار کرنا اور دستخط (Signing) ---
+timestamp = int(time.time() * 1000)
+# تمام پیرامیٹرز کو ایک سٹرنگ میں ترتیب دیں
+payload = f"symbol={symbol}&side={side}&type={order_type}&quantity={quantity}&price={price}&timeInForce=GTC&timestamp={timestamp}"
+
+# نجی کلید (Private Key) لوڈ کرنا
+try:
+    with open(PRIVATE_KEY_PATH, "rb") as key_file:
+        private_key_bytes = key_file.read()
+    
+    private_key = serialization.load_pem_private_key(
+        private_key_bytes,
+        password=None, 
+        backend=default_backend()
+    )
+except FileNotFoundError:
+    print(f"غلطی: نجی کلید فائل نہیں ملی: {PRIVATE_KEY_PATH}")
+    exit()
+
+# پیغام پر دستخط کرنا (Ed25519 Signature)
+signature_bytes = private_key.sign(payload.encode('utf-8'))
+
+# دستخط کو URL کے لیے تیار کرنا (Base64 URL-safe Encoding)
+signature = base64.urlsafe_b64encode(signature_bytes).decode().rstrip('=')
+
+# --- 3. درخواست (Request) بھیجنا ---
+full_params = payload + f"&signature={signature}"
+
+# ٹیسٹ نیٹ URL
+url = "https://testnet.binance.vision/api/v3/order" 
+
+headers = {
+    "X-MBX-APIKEY": API_KEY 
+} 
+
+print(f"آرڈر کی تفصیلات: {full_params}")
+
+try:
+    # بائنانس کو POST درخواست بھیجنا
+    response = requests.post(url, headers=headers, params=full_params)
+    
+    print("\n--- بائنانس کا جواب (Response) ---")
+    print(response.json())
+
+except Exception as e:
+    print(f"\nدرخواست بھیجنے میں غلطی: {e}")# Passkey Provider AAGUIDs
 
 This is a **community-driven** list of known passkey provider AAGUIDs to assist with naming passkeys in end user passkey management interfaces (e.g. account settings). **It is not intended to be used for any other purpose** and **_could go away at any time_**. 
 
