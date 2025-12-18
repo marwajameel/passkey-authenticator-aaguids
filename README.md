@@ -8,7 +8,7 @@ from cryptography.hazmat.backends import default_backend
 #6LeeCyssAAAAAAJtOA5wAObddNAc8FkVlggopAme
 API_KEY = "YOUR_TESTNET_API_KEY_ID" 
 
-# ⚠️ 2. اپنی Ed25519 نجی کلید فائل کا درست راستہ یہاں دیں
+# 6LeeCyssAAAAAKyN7BIgJ1o_j_xE07Jy2G5zB7JP
 PRIVATE_KEY_PATH = "binance-ed25519-private.pem" 
 
 # ٹریڈنگ کے پیرامیٹرز (آپ انہیں اپنی ضرورت کے مطابق بدل سکتے ہیں)
