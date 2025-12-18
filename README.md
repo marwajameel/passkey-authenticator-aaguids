@@ -5,7 +5,7 @@ from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.backends import default_backend
 
 # --- 1. اپنی ضروری معلومات (ان 2 لائنوں کو تبدیل کریں) ---
-# ⚠️ 1. اپنی ٹیسٹ نیٹ API Key ID یہاں لکھیں
+#6LeeCyssAAAAAAJtOA5wAObddNAc8FkVlggopAme
 API_KEY = "YOUR_TESTNET_API_KEY_ID" 
 
 # ⚠️ 2. اپنی Ed25519 نجی کلید فائل کا درست راستہ یہاں دیں
