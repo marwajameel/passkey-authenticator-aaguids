@@ -90,6 +90,3 @@ The properties are `icon_dark` and `icon_light`. The values of these properties 
 
 Many web-based tools can do this encoding/formatting, including: [https://base64.guru/converter/encode/image/svg](https://base64.guru/converter/encode/image/svg) (select `Data URI` under "Output Format").
 
-Example of the Google G icon as a base64 encoded SVG data URI:
-
-![]تحصیل پریس کلب رجسٹرڈ سرائے عالمگیر کی تق
