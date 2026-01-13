@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ur" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDN News - لائیو پورٹل</title>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, sans-serif; background-color: #f0f2f5; margin: 0; padding: 10px; }
+        .main-card { max-width: 800px; margin: 0 auto; background: white; border-radius: 15px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); overflow: hidden; }
+        .header { background: #cc0000; color: white; padding: 20px; text-align: center; border-bottom: 4px solid #ffcc00; }
+        .header h1 { margin: 0; font-size: 24px; }
+        .content { padding: 15px; }
+        .media-box { width: 100%; margin-bottom: 20px; border-radius: 10px; overflow: hidden; background: #000; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        #chart-container { width: 100%; height: 400px; }
+        .footer { background: #1a1a1a; color: white; padding: 20px; text-align: center; font-size: 14px; }
+        .footer a { color: #ffcc00; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+<div class="main-card">
+    <div class="header">
+        <h1>SDN NEWS - لائیو ویڈیو اور ڈیٹا رپورٹ</h1>
+        <p>رپورٹ: جمیل احمد کلیال</p>
+    </div>
+
+    <div class="content">
+        <div class="media-box">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/آپ_کی_ویڈیو_آئی_ڈی" allowfullscreen></iframe>
+            </div>
+        </div>
+
+        <div id="chart-container"></div>
+    </div>
+
+    <div class="footer">
+        <p><b>SDN News: باخبر، ہر لمحہ</b></p>
+        <p>آن لائن: <a href="http://www.SDNNews.com">www.SDNNews.com</a></p>
+        <p>رابطہ: +92 346 0008235 | ڈھوک کریالہ، سرائے عالمگیر</p>
+        <p style="font-size: 12px; margin-top: 10px; color: #888;">👤 Jamal Ahmad Kalyal | @SDN News</p>
+    </div>
+</div>
+
+<script>
+    Highcharts.chart('chart-container', {
+        chart: { type: 'column', backgroundColor: 'transparent' },
+        title: { text: 'علاقائی ترقیاتی سروے 2026', style: { fontWeight: 'bold' } },
+        xAxis: { 
+            categories: ['سرائے عالمگیر', 'کھاریاں', 'گجرات', 'جہلم', 'لالہ موسیٰ'],
+            labels: { style: { fontWeight: 'bold' } }
+        },
+        yAxis: { title: { text: 'پیشرفت (%)' }, min: 0, max: 100 },
+        series: [{
+            name: 'ترقیاتی کام',
+            colorByPoint: true,
+            colors: ['#cc0000', '#007bff', '#28a745', '#ffc107', '#17a2b8'],
+            data: [85, 72, 90, 65, 78]
+        }],
+        credits: { enabled: false }
+    });
+</script>
+
+</body>
+</html>
