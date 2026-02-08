@@ -1,0 +1,29 @@
+name: Automated Smart Account Transaction
+
+on:
+  schedule:
+    # یہ ہر روز پاکستانی وقت کے مطابق صبح 10 بجے چلے گا
+    - cron: '0 5 * * *'
+  workflow_dispatch: # اس بٹن سے آپ خود بھی کسی وقت چلا سکتے ہیں
+
+jobs:
+  run-smart-wallet:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Execute Transaction
+        env:
+          # اپنی API Keys یہاں سے لنک کریں
+          CDP_API_KEY_NAME: ${{ secrets.CDP_API_KEY_NAME }}
+          CDP_API_KEY_PRIVATE_KEY: ${{ secrets.CDP_API_KEY_PRIVATE_KEY }}
+        run: node index.js
