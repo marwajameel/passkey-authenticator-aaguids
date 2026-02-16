@@ -48,5 +48,5 @@
 **SDN News: باخبر، ہر لمحہ** 🌐 [www.SDNNews.com](http://www.SDNNews.com) | 📞 +92 346 0008235  
 **رپورٹ:** جمیل احمد کلیال
 
-💡https://via.placeholder.com/150
+💡https://via.placeholder.com/15
 
