@@ -1,0 +1,35 @@
+// ایک فنکشن بنائیں تاکہ اسے بٹن کے کلک پر چلایا جا سکے
+async function startPaymentProcess() {
+  try {
+    // ادائیگی کا عمل شروع ہو رہا ہے
+    const payment = await pay({
+      amount: '25.00', // رقم کی مقدار (25.00 روپے یا ڈالر)
+      to: '0xRecipient', // وصول کنندہ کا والٹ یا اکاؤنٹ آئی ڈی
+      payerInfo: {
+        requests: [
+          { type: 'email' }, // گاہک کا ای میل (لازمی)
+          { type: 'phoneNumber', optional: false }, // فون نمبر (لازمی کر دیا تاکہ رابطہ ہو سکے)
+          { type: 'physicalAddress', optional: false } // پتہ (لازمی - شپنگ کے لیے)
+        ],
+        callbackURL: 'https://your-api.com/verify-payment' // سرور پر تصدیق کے لیے
+      }
+    });
+
+    // اگر ادائیگی کامیاب ہو جائے
+    if (payment && payment.id) {
+       alert(`شکریہ! آپ کی ادائیگی کامیاب رہی۔ ٹرانزیکشن آئی ڈی: ${payment.id}`);
+       // یہاں آپ ڈیٹا بیس میں معلومات محفوظ کر سکتے ہیں
+       saveOrderDetails(payment.payerInfoResponses);
+    }
+
+  } catch (error) {
+    // غلطی کی صورت میں صارف کو پیغام دکھائیں
+    alert("معذرت! ادائیگی کے عمل میں کچھ مسئلہ پیش آیا ہے۔ براہ کرم دوبارہ کوشش کریں۔");
+    console.error(`تفصیلی غلطی: ${error.message}`);
+  }
+}
+
+// آرڈر محفوظ کرنے کا فرضی فنکشن
+function saveOrderDetails(info) {
+  console.log("صارف کا ڈیٹا محفوظ کیا جا رہا ہے...", info);
+}
