@@ -1,0 +1,35 @@
+try {
+  // ادائیگی کا عمل شروع کریں
+  const payment = await pay({
+    amount: '25.00', // رقم کی مقدار
+    to: '0xRecipient', // وصول کنندہ کا ایڈریس
+    payerInfo: {
+      requests: [
+        { type: 'email' }, // ای میل لازمی ہے
+        { type: 'phoneNumber', optional: true }, // فون نمبر (اختیاری)
+        { type: 'physicalAddress', optional: true } // گھر کا پتہ (اختیاری)
+      ],
+      callbackURL: 'https://your-api.com/validate' // سرور سائیڈ تصدیق کے لیے
+    }
+  });
+  
+  console.log(`ادائیگی مکمل ہوگئی! ٹرانزیکشن آئی ڈی: ${payment.id}`);
+  
+  // صارف کی فراہم کردہ معلومات کو لاگ کریں
+  if (payment.payerInfoResponses) {
+    if (payment.payerInfoResponses.email) {
+      console.log(`ای میل: ${payment.payerInfoResponses.email}`);
+    }
+    if (payment.payerInfoResponses.phoneNumber) {
+      console.log(`فون نمبر: ${payment.payerInfoResponses.phoneNumber.number}`);
+      console.log(`ملک: ${payment.payerInfoResponses.phoneNumber.country}`);
+    }
+    if (payment.payerInfoResponses.physicalAddress) {
+      const address = payment.payerInfoResponses.physicalAddress;
+      console.log(`شپنگ ایڈریس: ${address.name.firstName} ${address.name.familyName}, ${address.address1}, ${address.city}, ${address.state} ${address.postalCode}`);
+    }
+  }
+} catch (error) {
+  // اگر کوئی غلطی ہو تو اسے یہاں ہینڈل کریں
+  console.error(`ادائیگی ناکام ہوگئی: ${error.message}`);
+}
