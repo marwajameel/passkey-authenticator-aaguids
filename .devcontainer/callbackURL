@@ -1,0 +1,34 @@
+// جمیل احمد کلیال - SDN News کے لیے کسٹم والٹ ریکویسٹ
+const response = await provider.request({
+  method: "wallet_sendCalls",
+  params: [{
+    version: "1.0",
+    chainId: numberToHex(84532), // Base Sepolia نیٹ ورک
+    calls: [
+      // یہاں آپ کی ٹرانزکشن کالز (جیسے ٹوکن ٹرانسفر) آئیں گی
+    ],
+    capabilities: {
+      dataCallback: {
+        requests: [
+          {
+            type: "email",
+            optional: false, // صارف کا ای میل لازمی ہے
+          },
+          {
+            type: "phoneNumber", 
+            optional: false, // فون نمبر (جیسے 03460008235) لازمی ہے
+          },
+          {
+            type: "physicalAddress", 
+            optional: false, // آپ کا محفوظ شدہ پتہ (نظام آباد کلیال ہاؤس 182)
+          },
+        ],
+        // آپ کا تصدیقی سرور لنک
+        callbackURL: "https://SDNNews.com/api/validate-legal-notice", 
+      },
+    },
+  }],
+});
+
+// ڈیٹا وصول ہونے کے بعد آپ اسے اپنے ڈیٹا بیس میں محفوظ کر سکتے ہیں
+console.log("SDN News ٹرانزکشن مکمل: ", response);
