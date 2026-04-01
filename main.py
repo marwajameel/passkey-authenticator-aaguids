@@ -2,7 +2,7 @@ import openai
 import os
 from github import Github
 
-# 1. اپنی پرسنل کیز (Keys) یہاں سیٹ کریں (Replit Secrets میں ڈالنا بہتر ہے)
+# 1. اپنی پرسنل 4a3b615c-2c82-4297-b7e4-59c7fe6ee4b2) یہاں سیٹ کریں (Replit Secrets میں ڈالنا بہتر ہے)
 OPENAI_API_KEY = os.environ.get('OPENAI_API_KEY')
 GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
 REPO_NAME = "آپ_کا_یوزر_نیم/sdn-news-portal" # اپنی ریپوزٹری کا نام یہاں لکھیں
